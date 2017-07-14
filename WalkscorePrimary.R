@@ -68,6 +68,10 @@ for (i in 1:length(AssetList$MASTERENTITYID)){
 
 ##-----------------------------------------------
 ##-----------------------------------------------
-##EXPORT TO CSV
+##SAVE TO REPO
 ##=----------------------------------------------
 ##-----------------------------------------------
+
+WalkScorePayload <- AssetList
+save(WalkScorePayload,file="C:/Users/bkerschner/desktop/repo/Walkscore/WalkScorePayload.RDA")
+
