@@ -21,14 +21,17 @@ library(RJSONIO)
 ##=----------------------------------------------
 ##-----------------------------------------------
 
-#psswd <- .rs.askForPassword("Database Password:")
-#myconn <-odbcConnect("DEVSQL08", uid="bkerschner", pwd=psswd)
+psswd <- .rs.askForPassword("Database Password:")
+myconnDEV <-odbcConnect("DEVSQL08", uid="bkerschner", pwd=psswd)
+myconnSTA <-odbcConnect("STASQL30.GeoAnalytics", uid="bkerschner", pwd=psswd)
 
-#AssetList <- sqlQuery(myconn, "SELECT * FROM [ARCGIS_DATAMART].[dbo].[EQR_ASSETS_GEOCODED_070817]")
+#AssetList <- sqlQuery(myconnDEV, "SELECT * FROM [ARCGIS_DATAMART].[dbo].[EQR_ASSETS_GEOCODED_070817]")
+CompetitorList <- sqlQuery(myconnSTA, "SELECT * FROM [GeoAnalytics].[dbo].[EQR_ASSETS_AND_COMPETITORS]")
 
 #close(myconn)
 
 load("C:/Users/bkerschner/desktop/repo/RentalIncomeGrowth/EQR_ASSETS_GEOCODED.RDA")
+
 
 AssetList <- EQR_ASSETS_GEOCODED
 
@@ -74,4 +77,5 @@ for (i in 1:length(AssetList$MASTERENTITYID)){
 
 WalkScorePayload <- AssetList
 save(WalkScorePayload,file="C:/Users/bkerschner/desktop/repo/Walkscore/WalkScorePayload.RDA")
+write.csv(WalkScorePayload,file="C:/Users/bkerschner/desktop/repo/Walkscore/WalkScorePayload.csv")
 
